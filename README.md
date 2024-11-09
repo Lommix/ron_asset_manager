@@ -31,7 +31,7 @@ pub struct Wizard{
     pub sound: HashMap<String, Shandle<AudioSource>>,
 
     #[asset_vec]
-    pub spells: Vec<Shandle<Actions>>,
+    pub spells: Vec<Shandle<Spells>>,
 }
 
 // also you need to register your type.
