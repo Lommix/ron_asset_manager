@@ -28,7 +28,7 @@ pub struct Wizard{
     pub sprite: Shandle<Image>,
 
     #[asset_map]
-    pub sound: HashMap<String, Shandle<AudioSource>>,
+    pub sounds: HashMap<String, Shandle<AudioSource>>,
 
     #[asset_vec]
     pub spells: Vec<Shandle<Spells>>,
@@ -50,7 +50,7 @@ fn spawn_wizard(server: Res<AssetServer>){
 ```ron
 (
     sprite: "sprite/wizard.png",
-    spells: {
+    sounds: {
         "death" : "audio/wizard_death.ogg",
         "hit"   : "audio/wizard_hit.ogg",
         "angry" : "audio/wizard_angy.ogg",
