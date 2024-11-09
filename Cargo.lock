@@ -1689,12 +1689,25 @@ dependencies = [
 ]
 
 [[package]]
+name = "ron_asset_derive"
+version = "0.1.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "f28eaf6fe3889acf3ced93deb9cd80838066ca573c29b514b3c764f2df8add8f"
+dependencies = [
+ "bevy",
+ "proc-macro2",
+ "quote",
+ "serde",
+ "syn",
+]
+
+[[package]]
 name = "ron_asset_manager"
 version = "0.1.0"
 dependencies = [
  "bevy",
  "ron",
- "ron_asset_derive",
+ "ron_asset_derive 0.1.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde",
  "thiserror",
 ]
