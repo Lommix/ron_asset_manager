@@ -55,10 +55,10 @@ fn spawn_wizard(server: Res<AssetServer>){
         "hit"   : "audio/wizard_hit.ogg",
         "angry" : "audio/wizard_angy.ogg",
     },
-    spells: (
+    spells: [
         "spells/fireball.ron",
         "spells/lightning.ron",
-    )
+    ]
 )
 ```
 
