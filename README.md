@@ -35,13 +35,14 @@ pub struct Wizard{
 }
 
 // also you need to register your type.
+// this step will create a needed
 fn build(&self, app: &mut App) {
     app.add_plugins(RonAssetPlugin::<Wizard>::default());
 }
 
 // that's all, time to use it
 fn spawn_wizard(server: Res<AssetServer>){
-    let wizard_handle = server.load("/enemies/wizard.ron")
+    let wizard_handle: Handle<Wizard> = server.load("enemies/wizard.ron")
     ...
 }
 ```
