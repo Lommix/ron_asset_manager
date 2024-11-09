@@ -34,17 +34,23 @@ pub struct Wizard{
     pub spells: Vec<Shandle<Spells>>,
 }
 
-// also you need to register your type.
-// this step will create a needed
+// add the provided plugin for your asset struct.
+// this steps also initializes the asset for bevy.
 fn build(&self, app: &mut App) {
     app.add_plugins(RonAssetPlugin::<Wizard>::default());
 }
 
 // that's all, time to use it
-fn spawn_wizard(server: Res<AssetServer>){
+fn spawn_wizard(mut cmd: Commands, server: Res<AssetServer>){
     let wizard_handle: Handle<Wizard> = server.load("enemies/wizard.ron")
-    ...
+
+    cmd.spawn((
+        WizardSpawner(wizard_handle),
+        SpawnCount(3),
+        Transfrom::default(),
+    ));
 }
+
 ```
 
 ```ron
@@ -61,7 +67,6 @@ fn spawn_wizard(server: Res<AssetServer>){
     ]
 )
 ```
-
 
 ## Future plans
 
