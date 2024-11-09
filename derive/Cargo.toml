@@ -1,7 +1,12 @@
 [package]
-name = "derive"
+name = "ron_asset_derive"
 version = "0.1.0"
 edition = "2021"
+authors = ["Lorenz Mielke"]
+description = "a proc macro to help with asset dependencies"
+keywords = ["bevy", "assets", "ron", "configuration"]
+license = "MIT"
+repository = "https://github.com/Lommix/ron_asset_manager.git"
 
 [lib]
 proc-macro = true

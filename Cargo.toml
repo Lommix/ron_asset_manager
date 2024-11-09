@@ -15,7 +15,8 @@ repository = "https://github.com/Lommix/ron_asset_manager.git"
 bevy = { version = "0.14", default-features = false, features = [
   "bevy_asset",
 ] }
-derive = { version = "*", path = "derive" }
+# ron_asset_derive = { version = "*" , path= "./derive"}
+ron_asset_derive = "0.1"
 ron = "0.8.1"
 serde = { version = "1.0.214", features = ["derive"] }
 thiserror = "1.0.66"

@@ -7,8 +7,8 @@ use serde::de::Visitor;
 use thiserror::Error;
 
 pub mod prelude {
-    pub use super::{RonAsset, RonAssetError, RonAssetPlugin, Shandle};
-    pub use derive::RonAsset;
+    pub use super::{RonAsset,RonAssetError, RonAssetPlugin, Shandle};
+    pub use ron_asset_derive::RonAsset;
 }
 
 pub trait RonAsset {
