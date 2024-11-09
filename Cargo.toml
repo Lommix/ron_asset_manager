@@ -9,6 +9,7 @@ authors = ["Lorenz Mielke"]
 description = "A dead simple crate to manage Ron based assets which depend on other assets."
 keywords = ["bevy", "assets", "ron", "configuration"]
 license = "MIT"
+repository = "https://github.com/Lommix/ron_asset_manager.git"
 
 [dependencies]
 bevy = { version = "0.14.2", default-features = false, features = [
