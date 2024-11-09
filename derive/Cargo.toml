@@ -1,0 +1,16 @@
+[package]
+name = "derive"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+proc-macro = true
+
+[dependencies]
+bevy = { version = "0.14.2", default-features = false, features = [
+  "bevy_asset",
+] }
+serde = { version = "1.0.214", features = ["derive"] }
+proc-macro2 = "1.0.89"
+quote = "1.0.37"
+syn = "2.0.86"

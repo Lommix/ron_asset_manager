@@ -1,0 +1,20 @@
+[workspace]
+members = [".", "derive"]
+
+[package]
+name = "ron_asset_manager"
+version = "0.1.0"
+edition = "2021"
+authors = ["Lorenz Mielke"]
+description = "A dead simple crate to manage Ron based assets which depend on other assets."
+keywords = ["bevy", "assets", "ron", "configuration"]
+license = "MIT"
+
+[dependencies]
+bevy = { version = "0.14.2", default-features = false, features = [
+  "bevy_asset",
+] }
+derive = { path = "derive" }
+ron = "0.8.1"
+serde = { version = "1.0.214", features = ["derive"] }
+thiserror = "1.0.66"
