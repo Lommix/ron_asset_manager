@@ -28,7 +28,7 @@ pub struct Wizard{
     pub sprite: Shandle<Image>,
 
     #[asset_map]
-    pub sound: HashMap<String, Shandle<Spell>>,
+    pub sound: HashMap<String, Shandle<AudioSource>>,
 
     #[asset_vec]
     pub spells: Vec<Shandle<Actions>>,
