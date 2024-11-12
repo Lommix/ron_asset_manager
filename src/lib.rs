@@ -137,12 +137,6 @@ impl<T: Asset> Shandle<T> {
     }
 }
 
-impl<T: Asset> Shandle<T> {
-    pub fn load(&mut self, context: &mut LoadContext) {
-        self.handle = context.load(&self.path);
-    }
-}
-
 impl<T: Asset> std::ops::Deref for Shandle<T> {
     type Target = Handle<T>;
     fn deref(&self) -> &Self::Target {
