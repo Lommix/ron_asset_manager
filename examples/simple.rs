@@ -33,11 +33,9 @@ fn loaded(game_assets: Res<GameAssets>, car_assets: Res<Assets<Car>>) {
 pub struct Car {
     pub speed: f32,
     pub name: String,
-
     #[asset]
     pub body_sprite: Shandle<Image>,
-
-    #[asset_struct_vec]
+    #[asset]
     pub wheels: Vec<Wheel>,
 }
 

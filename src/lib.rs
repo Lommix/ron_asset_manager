@@ -1,6 +1,7 @@
 use bevy::{
     asset::{io::Reader, AssetLoader, AsyncReadExt, LoadContext},
     prelude::*,
+    utils::HashMap,
 };
 use ron::de::SpannedError;
 use serde::de::Visitor;
@@ -11,8 +12,42 @@ pub mod prelude {
     pub use ron_asset_derive::RonAsset;
 }
 
+/// A trait that can load itself given access
+/// to a Loading Context
+/// Default impls for `HashMap<Shandle>`, `Vec<Shandle>` and `Shandle`
+/// you can also add your own data structs that serialize and hold
+/// asset handles.
 pub trait RonAsset: serde::de::DeserializeOwned {
-    fn load_sub_assets(&mut self, asset_server: &mut LoadContext);
+    fn load_assets(&mut self, context: &mut LoadContext);
+}
+
+impl<T: Asset> RonAsset for Shandle<T> {
+    fn load_assets(&mut self, context: &mut LoadContext) {
+        self.handle = context.load(&self.path);
+    }
+}
+
+impl<R> RonAsset for Vec<R>
+where
+    R: RonAsset,
+{
+    fn load_assets(&mut self, context: &mut LoadContext) {
+        self.iter_mut().for_each(|ron_asset| {
+            ron_asset.load_assets(context);
+        });
+    }
+}
+
+impl<K, R> RonAsset for HashMap<K, R>
+where
+    K: serde::de::DeserializeOwned + Eq + std::hash::Hash,
+    R: RonAsset,
+{
+    fn load_assets(&mut self, context: &mut LoadContext) {
+        self.iter_mut().for_each(|(_, ron_asset)| {
+            ron_asset.load_assets(context);
+        });
+    }
 }
 
 #[derive(Error, Debug)]
@@ -61,7 +96,7 @@ where
         let mut asset = ron::de::from_bytes::<Self::Asset>(bytes.as_slice())
             .map_err(|err| RonAssetError::FailedToLoad(err))?;
 
-        asset.load_sub_assets(load_context);
+        asset.load_assets(load_context);
         Ok(asset)
     }
 

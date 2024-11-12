@@ -19,17 +19,8 @@ behaving like a asset path in serialized form.
 This crates provides the `RonAsset` derive macro, `RonAssetPlugin` and the `Shandle`.
 The idea is to mark asset dependencies via attribute.
 
-
-|          attribute |                                               what is does |
-| -----------------: | ---------------------------------------------------------: |
-|            `asset` |                                a single `Shandle<A>` field |
-|        `asset_vec` |                                  a `Vec<Shandle<A>>` field |
-|        `asset_map` |                            a `HashMap<K,Shandle<A>>` field |
-|     `asset_struct` | A struct deriving `RonAsset` with its own asset attributes |
-| `asset_struct_vec` |                                         a Vec of RonAssets |
-| `asset_struct_map` |                                     a HashMap of RonAssets |
-
-!Nested structs do not need to be assets themself. Checkout the `simple example`!
+Any field, implementing the `RonAsset` trait can be nested and will automatic load.
+There are defaults for `Vec` and `HashMap`. You can also implement your own, if you need to.
 
 `cargo run --example simple`
 
@@ -45,11 +36,11 @@ pub struct Wizard{
     pub health: f32,
     #[asset]
     pub sprite: Shandle<Image>,
-    #[asset_map]
+    #[asset]
     pub sounds: HashMap<String, Shandle<AudioSource>>,
-    #[asset_vec]
+    #[asset]
     pub spells: Vec<Shandle<Spells>>,
-    #[asset_struct]
+    #[asset]
     pub staff: Weapon,
 }
 
