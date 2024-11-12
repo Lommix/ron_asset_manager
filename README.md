@@ -9,7 +9,9 @@ on other assets.
 Assets can hot reload into a running game state. Use it to your
 advantage!
 
-## How to
+#### **Any asset, that can be loaded from an asset path is supported!**
+
+## Harness the power of external configuration.
 
 `Shandle<T>` is a thin wrapper around `Handle<T>` that can be serialized by
 behaving like a asset path in serialized form.
@@ -17,21 +19,46 @@ behaving like a asset path in serialized form.
 This crates provides the `RonAsset` derive macro, `RonAssetPlugin` and the `Shandle`.
 The idea is to mark asset dependencies via attribute.
 
-Currently there is `#[asset]`, `#[asset_vec]`, `#[asset_map]`.
+
+|          attribute |                                               what is does |
+| -----------------: | ---------------------------------------------------------: |
+|            `asset` |                                a single `Shandle<A>` field |
+|        `asset_vec` |                                  a `Vec<Shandle<A>>` field |
+|        `asset_map` |                            a `HashMap<K,Shandle<A>>` field |
+|     `asset_struct` | A struct deriving `RonAsset` with its own asset attributes |
+| `asset_struct_vec` |                                         a Vec of RonAssets |
+| `asset_struct_map` |                                     a HashMap of RonAssets |
+
+!Nested structs do not need to be assets themself. Checkout the `simple example`!
+
+`cargo run --example simple`
 
 ## Example
+
+Checkout the `simple` example. It loads a multi-sprite car with multiple tires each holding unique information
+and assets.
 
 ```rust
 #[derive(Asset, TypePath, RonAsset, Deserialize)]
 pub struct Wizard{
+    pub name: String,
+    pub health: f32,
     #[asset]
     pub sprite: Shandle<Image>,
-
     #[asset_map]
     pub sounds: HashMap<String, Shandle<AudioSource>>,
-
     #[asset_vec]
     pub spells: Vec<Shandle<Spells>>,
+    #[asset_struct]
+    pub staff: Weapon,
+}
+
+#[derive(RonAsset, Deserialize)]
+pub struct Weapon{
+    pub damage: f32,
+    pub cooldown: f32,
+    #[asset]
+    pub sprite: Shandle<Image>,
 }
 
 // add the provided plugin for your asset struct.
@@ -42,7 +69,7 @@ fn build(&self, app: &mut App) {
 
 // that's all, time to use it
 fn spawn_wizard(mut cmd: Commands, server: Res<AssetServer>){
-    let wizard_handle: Handle<Wizard> = server.load("enemies/wizard.ron")
+    let wizard_handle: Handle<Wizard> = server.load("enemies/gandalf.ron")
 
     cmd.spawn((
         WizardSpawner(wizard_handle),
@@ -53,21 +80,26 @@ fn spawn_wizard(mut cmd: Commands, server: Res<AssetServer>){
 
 ```
 
+_gandalf.ron_:
+
 ```ron
 (
-    sprite: "sprite/wizard.png",
+    name: "Gandalf",
+    health: 42069,
+    sprite: "sprite/gandalf.png",
     sounds: {
-        "death" : "audio/wizard_death.ogg",
-        "hit"   : "audio/wizard_hit.ogg",
-        "angry" : "audio/wizard_angy.ogg",
+        "death" : "audio/gandalf_rebirth.ogg",
+        "hit"   : "audio/gandalf_hurt.ogg",
+        "angry" : "audio/gandalf_calm.ogg",
     },
     spells: [
-        "spells/fireball.ron",
-        "spells/lightning.ron",
-    ]
+        "spells/light.ron",
+        "spells/cloth_swap.ron",
+    ],
+    staff : (
+        damage: 99,
+        cooldown: 1,
+        sprite: "staff.png"
+    )
 )
 ```
-
-## Future plans
-
-Nested structs via another attribute `#[ron_struct(field1, field2)]`.

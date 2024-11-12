@@ -1,0 +1,27 @@
+(
+    name: "my car",
+    speed: 100,
+    body_sprite: "car_body.png",
+    wheels: [
+        (
+            position: (10, 8),
+            sprite: "tire.png",
+			can_turn: true,
+        ),
+        (
+            position: (10, 8),
+            sprite: "tire.png",
+			can_turn: true,
+        ),
+        (
+            position: (-10, -8),
+            sprite: "tire.png",
+			can_turn: false,
+        ),
+        (
+            position: (-10, 8),
+            sprite: "tire.png",
+			can_turn: false,
+        ),
+    ],
+)

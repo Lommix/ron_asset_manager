@@ -7,12 +7,12 @@ use serde::de::Visitor;
 use thiserror::Error;
 
 pub mod prelude {
-    pub use super::{RonAsset,RonAssetError, RonAssetPlugin, Shandle};
+    pub use super::{RonAsset, RonAssetError, RonAssetPlugin, Shandle};
     pub use ron_asset_derive::RonAsset;
 }
 
-pub trait RonAsset {
-    fn load_dep(&mut self, asset_server: &mut LoadContext);
+pub trait RonAsset: serde::de::DeserializeOwned {
+    fn load_sub_assets(&mut self, asset_server: &mut LoadContext);
 }
 
 #[derive(Error, Debug)]
@@ -61,7 +61,7 @@ where
         let mut asset = ron::de::from_bytes::<Self::Asset>(bytes.as_slice())
             .map_err(|err| RonAssetError::FailedToLoad(err))?;
 
-        asset.load_dep(load_context);
+        asset.load_sub_assets(load_context);
         Ok(asset)
     }
 
@@ -90,7 +90,7 @@ where
 ///
 /// Deriving `RonAsset` ensures, that each Shandle with a valid
 /// asset path is loaded by the asset server aswell.
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct Shandle<T: Asset> {
     pub handle: Handle<T>,
     pub path: String,

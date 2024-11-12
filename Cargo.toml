@@ -12,10 +12,11 @@ license = "MIT"
 repository = "https://github.com/Lommix/ron_asset_manager.git"
 
 [dependencies]
-bevy = { version = "0.14", default-features = false, features = [
-  "bevy_asset",
-] }
-ron_asset_derive = "0.1"
+bevy = { version = "0.14", default-features = false, features = ["bevy_asset"] }
+ron_asset_derive = "0.2"
 ron = "0.8.1"
 serde = { version = "1.0.214", features = ["derive"] }
 thiserror = "1.0.66"
+
+[dev-dependencies]
+bevy = "0.14"
