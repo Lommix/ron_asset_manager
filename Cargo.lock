@@ -3126,7 +3126,20 @@ dependencies = [
 
 [[package]]
 name = "ron_asset_derive"
-version = "0.2.1"
+version = "0.3.0"
+dependencies = [
+ "bevy",
+ "proc-macro2",
+ "quote",
+ "serde",
+ "syn 2.0.86",
+]
+
+[[package]]
+name = "ron_asset_derive"
+version = "0.3.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a0b72c444061052ef2ff7880cab8cde9e48257acc4f43cd500b942fbcbda57a0"
 dependencies = [
  "bevy",
  "proc-macro2",
@@ -3137,11 +3150,11 @@ dependencies = [
 
 [[package]]
 name = "ron_asset_manager"
-version = "0.2.0"
+version = "0.3.0"
 dependencies = [
  "bevy",
  "ron",
- "ron_asset_derive",
+ "ron_asset_derive 0.3.0 (registry+https://github.com/rust-lang/crates.io-index)",
  "serde",
  "thiserror",
 ]
