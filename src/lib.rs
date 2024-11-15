@@ -125,7 +125,7 @@ where
 ///
 /// Deriving `RonAsset` ensures, that each Shandle with a valid
 /// asset path is loaded by the asset server aswell.
-#[derive(Debug, Default)]
+#[derive(Debug, Default, Clone)]
 pub struct Shandle<T: Asset> {
     pub handle: Handle<T>,
     pub path: String,
