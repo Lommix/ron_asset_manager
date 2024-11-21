@@ -11,6 +11,11 @@ advantage!
 
 #### **Any asset, that can be loaded from an asset path is supported!**
 
+| bevy | ron asset manager |
+| :--- | :---------------- |
+| 0.15 | main              |
+| 0.14 | 0.3.1             |
+
 ## Harness the power of external configuration.
 
 `Shandle<T>` is a thin wrapper around `Handle<T>` that can be serialized by

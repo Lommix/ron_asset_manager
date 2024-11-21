@@ -1,5 +1,9 @@
+#![cfg_attr(docsrs, feature(doc_auto_cfg))]
+#![allow(rustdoc::redundant_explicit_links)]
+#![doc = include_str!("../README.md")]
+
 use bevy::{
-    asset::{io::Reader, AssetLoader, AsyncReadExt, LoadContext},
+    asset::{io::Reader, AssetLoader, LoadContext},
     prelude::*,
     utils::HashMap,
 };
@@ -85,11 +89,11 @@ where
     type Settings = ();
     type Error = RonAssetError;
 
-    async fn load<'a>(
-        &'a self,
-        reader: &'a mut Reader<'_>,
-        _settings: &'a Self::Settings,
-        load_context: &'a mut bevy::asset::LoadContext<'_>,
+    async fn load(
+        &self,
+        reader: &mut dyn Reader,
+        _settings: &Self::Settings,
+        load_context: &mut LoadContext<'_>,
     ) -> Result<Self::Asset, Self::Error> {
         let mut bytes = Vec::new();
         reader.read_to_end(&mut bytes).await.unwrap();
