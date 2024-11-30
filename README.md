@@ -13,8 +13,8 @@ advantage!
 
 | bevy | ron asset manager |
 | :--- | :---------------- |
-| 0.15 | main              |
-| 0.14 | 0.3.1             |
+| 0.15 | 0.5               |
+| 0.14 | 0.4               |
 
 ## Harness the power of external configuration.
 
