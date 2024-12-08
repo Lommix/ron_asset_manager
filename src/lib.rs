@@ -61,23 +61,35 @@ pub enum RonAssetError {
 }
 
 pub struct RonAssetPlugin<T: Asset> {
+    ext: String,
     _m: std::marker::PhantomData<T>,
 }
 
 impl<T: Asset> Default for RonAssetPlugin<T> {
     fn default() -> Self {
         Self {
+            ext: String::from("ron"),
+            _m: Default::default(),
+        }
+    }
+}
+
+impl<T: Asset> RonAssetPlugin<T> {
+    pub fn create(ext: &str) -> Self {
+        Self {
+            ext: String::from(ext),
             _m: Default::default(),
         }
     }
 }
 
 struct RonAssetLoader<T: Asset> {
+    ext: [&'static str; 1],
     _m: std::marker::PhantomData<T>,
 }
-impl<T: Asset> Default for RonAssetLoader<T> {
-    fn default() -> Self {
-        Self { _m: default() }
+impl<T: Asset> RonAssetLoader<T> {
+    fn create(ext: &'static str) -> Self {
+        Self { ext: [ext], _m: default() }
     }
 }
 
@@ -105,7 +117,7 @@ where
     }
 
     fn extensions(&self) -> &[&str] {
-        &["ron"]
+        &self.ext
     }
 }
 
@@ -120,7 +132,7 @@ where
 {
     fn build(&self, app: &mut App) {
         app.init_asset::<T>();
-        app.register_asset_loader(RonAssetLoader::<T>::default());
+        app.register_asset_loader(RonAssetLoader::<T>::create(self.ext.clone().leak()));
     }
 }
 

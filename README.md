@@ -61,11 +61,15 @@ pub struct Weapon{
 // this steps also initializes the asset for bevy.
 fn build(&self, app: &mut App) {
     app.add_plugins(RonAssetPlugin::<Wizard>::default());
+    
+    // or specify custom file format (useful for multiple asset types)
+    // app.add_plugins(RonAssetPlugin::<Wizard>::create("wizzard.ron"));
+    // app.add_plugins(RonAssetPlugin::<Spell>::create("spell.ron"));
 }
 
 // that's all, time to use it
 fn spawn_wizard(mut cmd: Commands, server: Res<AssetServer>){
-    let wizard_handle: Handle<Wizard> = server.load("enemies/gandalf.ron")
+    let wizard_handle: Handle<Wizard> = server.load("enemies/gandalf.ron");
 
     cmd.spawn((
         WizardSpawner(wizard_handle),
