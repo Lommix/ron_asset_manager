@@ -25,7 +25,7 @@ This crates provides the `RonAsset` derive macro, `RonAssetPlugin` and the `Shan
 The idea is to mark asset dependencies via attribute.
 
 Any field, implementing the `RonAsset` trait can be nested and will automatic load.
-There are defaults for `Vec` and `HashMap`. You can also implement your own, if you need to.
+There are defaults for `Option`, `Vec` and `HashMap`. You can also implement your own, if you need to.
 
 `cargo run --example simple`
 
@@ -55,6 +55,8 @@ pub struct Weapon{
     pub cooldown: f32,
     #[asset]
     pub sprite: Shandle<Image>,
+    #[asset]
+    pub birth_effect: Option<Shandle<Image>>,
 }
 
 // add the provided plugin for your asset struct.
@@ -100,6 +102,7 @@ _gandalf.ron_:
         damage: 99,
         cooldown: 1,
         sprite: "staff.png"
-    )
+    ),
+    birth_effect: Some("fx/common_death.fx.ron")
 )
 ```
