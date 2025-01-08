@@ -31,6 +31,19 @@ impl<T: Asset> RonAsset for Shandle<T> {
     }
 }
 
+impl<R> RonAsset for Option<R>
+where
+    R: RonAsset,
+{
+    fn load_assets(&mut self, context: &mut LoadContext) {
+        if self.is_none() {
+            return;
+        }
+
+        self.as_mut().unwrap().load_assets(context);
+    }
+}
+
 impl<R> RonAsset for Vec<R>
 where
     R: RonAsset,
