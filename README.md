@@ -13,6 +13,7 @@ advantage!
 
 | bevy | ron asset manager |
 | :--- | :---------------- |
+| 0.16 | 0.6               |
 | 0.15 | 0.5               |
 | 0.14 | 0.4               |
 
@@ -63,7 +64,7 @@ pub struct Weapon{
 // this steps also initializes the asset for bevy.
 fn build(&self, app: &mut App) {
     app.add_plugins(RonAssetPlugin::<Wizard>::default());
-    
+
     // or specify custom file format (useful for multiple asset types)
     // app.add_plugins(RonAssetPlugin::<Wizard>::create("wizzard.ron"));
     // app.add_plugins(RonAssetPlugin::<Spell>::create("spell.ron"));

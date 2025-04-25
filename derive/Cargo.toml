@@ -1,6 +1,6 @@
 [package]
 name = "ron_asset_derive"
-version = "0.3.1"
+version = "0.4.0"
 edition = "2021"
 authors = ["Lorenz Mielke"]
 description = "a proc macro to help with asset dependencies"
@@ -12,7 +12,7 @@ repository = "https://github.com/Lommix/ron_asset_manager.git"
 proc-macro = true
 
 [dependencies]
-bevy = { version = "0.15", default-features = false, features = ["bevy_asset"] }
+bevy = { version = "0.16", default-features = false, features = ["bevy_asset"] }
 serde = { version = "1.0.214", features = ["derive"] }
 proc-macro2 = "1.0.89"
 quote = "1.0.37"

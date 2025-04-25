@@ -3,9 +3,7 @@
 #![doc = include_str!("../README.md")]
 
 use bevy::{
-    asset::{io::Reader, AssetLoader, LoadContext},
-    prelude::*,
-    utils::HashMap,
+    asset::{io::Reader, AssetLoader, LoadContext}, platform::collections::HashMap, prelude::*
 };
 use ron::de::SpannedError;
 use serde::de::Visitor;
@@ -102,7 +100,10 @@ struct RonAssetLoader<T: Asset> {
 }
 impl<T: Asset> RonAssetLoader<T> {
     fn create(ext: &'static str) -> Self {
-        Self { ext: [ext], _m: default() }
+        Self {
+            ext: [ext],
+            _m: default(),
+        }
     }
 }
 
