@@ -1,7 +1,7 @@
 # ron asset manager
 
 [![License: MIT or Apache 2.0](https://img.shields.io/badge/License-MIT%20or%20Apache2-blue.svg)](./LICENSE)
-[![Crate](https://img.shields.io/crates/v/bevy_enoki.svg)](https://crates.io/crates/ron_asset_manager)
+[![Crate](https://img.shields.io/crates/v/ron_asset_manager.svg)](https://crates.io/crates/ron_asset_manager)
 
 A dead simple crate to manage Ron based assets which depend
 on other assets.
