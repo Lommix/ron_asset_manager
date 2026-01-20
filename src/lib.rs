@@ -94,6 +94,7 @@ impl<T: Asset> RonAssetPlugin<T> {
     }
 }
 
+#[derive(TypePath)]
 struct RonAssetLoader<T: Asset> {
     ext: [&'static str; 1],
     _m: std::marker::PhantomData<T>,
@@ -151,10 +152,10 @@ where
 }
 
 /// `Shandle<T>` is a thin wrapper around `Handle<T>`
-/// that implements the `Seriliaze` & `Deserialze` traits.
+/// that implements the `Serialize` & `Deserialize` traits.
 ///
 /// Deriving `RonAsset` ensures, that each Shandle with a valid
-/// asset path is loaded by the asset server aswell.
+/// asset path is loaded by the asset server as well.
 #[derive(Debug, Default, Clone)]
 pub struct Shandle<T: Asset> {
     pub handle: Handle<T>,
@@ -195,16 +196,16 @@ impl<'de, T: Asset> serde::Deserialize<'de> for Shandle<T> {
     where
         D: serde::Deserializer<'de>,
     {
-        let path = deserializer.deserialize_string(AssetPathVistor)?;
-        return Ok(Shandle {
+        let path = deserializer.deserialize_string(AssetPathVisitor)?;
+        Ok(Shandle {
             handle: Handle::default(),
             path,
-        });
+        })
     }
 }
 
-struct AssetPathVistor;
-impl<'de> Visitor<'de> for AssetPathVistor {
+struct AssetPathVisitor;
+impl<'de> Visitor<'de> for AssetPathVisitor {
     type Value = String;
     fn expecting(&self, formatter: &mut std::fmt::Formatter) -> std::fmt::Result {
         formatter.write_str("provided handle value is not a path string")

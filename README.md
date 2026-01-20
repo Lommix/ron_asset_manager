@@ -12,7 +12,8 @@ advantage!
 #### **Any asset, that can be loaded from an asset path is supported!**
 
 | bevy | ron asset manager |
-| :--- | :---------------- |
+|:-----|:------------------|
+| 0.18 | 0.8               |
 | 0.17 | 0.7               |
 | 0.16 | 0.6               |
 | 0.15 | 0.5               |
@@ -63,7 +64,7 @@ pub struct Weapon{
 
 // add the provided plugin for your asset struct.
 // this steps also initializes the asset for bevy.
-fn build(&self, app: &mut App) {
+fn build(app: &mut App) {
     app.add_plugins(RonAssetPlugin::<Wizard>::default());
 
     // or specify custom file format (useful for multiple asset types)

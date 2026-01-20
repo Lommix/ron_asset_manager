@@ -3,7 +3,7 @@ members = [".", "derive"]
 
 [package]
 name = "ron_asset_manager"
-version = "0.7.0"
+version = "0.8.0"
 edition = "2021"
 authors = ["Lorenz Mielke"]
 description = "A dead simple crate to manage Ron based assets which depend on other assets."
@@ -13,11 +13,11 @@ readme = "README.md"
 repository = "https://github.com/Lommix/ron_asset_manager.git"
 
 [dependencies]
-bevy = { version = "0.17", default-features = false, features = ["bevy_asset"] }
-ron_asset_derive = "0.5"
-ron = "0.8.1"
-serde = { version = "1.0.214", features = ["derive"] }
-thiserror = "1.0.66"
+bevy = { version = "0.18", default-features = false, features = ["bevy_asset"] }
+ron_asset_derive = { path = "derive", version = "0.6" }
+ron = "0"
+serde = { version = "1", features = ["derive"] }
+thiserror = "1"
 
 [dev-dependencies]
-bevy = { version = "0.17", default-features = true, features = ["reflect_auto_register_static"] }
+bevy = { version = "0.18", default-features = true, features = ["reflect_auto_register_static"] }
