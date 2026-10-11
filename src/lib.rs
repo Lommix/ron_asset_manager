@@ -138,7 +138,7 @@ where
 
 /// #[derive(Asset, RonAsset, Deserialize, Serialize)]
 /// pub struct MetaAsset {
-///     sprite: Shandle<Image>,
+///     sprite: `Shandle<Image>`,
 ///     desc: String,
 /// }
 impl<T> Plugin for RonAssetPlugin<T>

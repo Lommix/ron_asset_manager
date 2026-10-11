@@ -1,6 +1,6 @@
 # ron asset manager
 
-[![License: MIT or Apache 2.0](https://img.shields.io/badge/License-MIT%20or%20Apache2-blue.svg)](./LICENSE)
+[![License: MIT or Apache 2.0](https://img.shields.io/badge/License-MIT%20or%20Apache2-blue.svg)](./LICENSE-MIT)
 [![Crate](https://img.shields.io/crates/v/ron_asset_manager.svg)](https://crates.io/crates/ron_asset_manager)
 
 A dead simple crate to manage Ron based assets which depend
@@ -13,6 +13,7 @@ advantage!
 
 | bevy | ron asset manager |
 |:-----|:------------------|
+| 0.20 | 0.10              |
 | 0.19 | 0.9               |
 | 0.18 | 0.8               |
 | 0.17 | 0.7               |
@@ -38,7 +39,7 @@ There are defaults for `Option`, `Vec` and `HashMap`. You can also implement you
 Checkout the `simple` example. It loads a multi-sprite car with multiple tires each holding unique information
 and assets.
 
-```rust
+```rust,ignore
 #[derive(Asset, TypePath, RonAsset, Deserialize)]
 pub struct Wizard{
     pub name: String,
